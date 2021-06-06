@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 import java.io.File
@@ -20,12 +21,20 @@ class MainActivity : AppCompatActivity() {
         // init player
         player = SimpleExoPlayer.Builder(this).build()
 
+        // repeat infinite loop
+        player!!.repeatMode = Player.REPEAT_MODE_ALL
+
         // set media source
-        val uri = Uri.fromFile(File("/sdcard/video1.mp4"))
-        player?.apply {
-            setMediaItem(MediaItem.fromUri(uri))
-            prepare()
+        val playlist = arrayListOf(
+            "/sdcard/video1.mp4",
+            "/sdcard/video2.mp4",
+            "/sdcard/video3.mp4",
+        )
+        playlist.forEach {
+            val item = MediaItem.fromUri(Uri.fromFile(File(it)))
+            player!!.addMediaItem(item)
         }
+        player!!.prepare()
 
         // prepare player view
         val playerView = PlayerView(this)
