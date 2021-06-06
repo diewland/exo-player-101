@@ -1,7 +1,9 @@
 package com.example.exo101
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.MediaItem
@@ -10,9 +12,12 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 import java.io.File
 
+const val TAG = "EXO101"
+
 class MainActivity : AppCompatActivity() {
 
     private var player: SimpleExoPlayer? = null
+    lateinit var stickyIntent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         // set media source
         val playlist = arrayListOf(
-            "/sdcard/video1.mp4",
-            "/sdcard/video2.mp4",
-            "/sdcard/video3.mp4",
+                "/sdcard/video1.mp4",
+                "/sdcard/video2.mp4",
+                "/sdcard/video3.mp4",
         )
         playlist.forEach {
             val item = MediaItem.fromUri(Uri.fromFile(File(it)))
@@ -50,6 +55,12 @@ class MainActivity : AppCompatActivity() {
         // add player view to screen
         val root = findViewById<LinearLayout>(R.id.ll_root)
         root.addView(playerView)
+
+        // add service
+        stickyIntent = Intent(this, AwesomeForegroundService::class.java)
+        Log.d(TAG, "----- x -----")
+        startService(stickyIntent)
+        Log.d(TAG, "----- x -----")
     }
 
     override fun onResume() {
@@ -65,5 +76,9 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         player?.release()
+
+        Log.d(TAG, "----- x -----")
+        stopService(stickyIntent)
+        Log.d(TAG, "----- x -----")
     }
 }
