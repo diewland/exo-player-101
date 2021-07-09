@@ -8,6 +8,8 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.upstream.DataSpec
+import com.google.android.exoplayer2.upstream.RawResourceDataSource
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -26,12 +28,17 @@ class MainActivity : AppCompatActivity() {
 
         // set media source
         val playlist = arrayListOf(
-            "/sdcard/video1.mp4",
-            "/sdcard/video2.mp4",
-            "/sdcard/video3.mp4",
+            //"/sdcard/video1.mp4",
+            //"/sdcard/video2.mp4",
+            //"/sdcard/video3.mp4",
+            R.raw.coke,
+            R.raw.pepsi,
         )
         playlist.forEach {
-            val item = MediaItem.fromUri(Uri.fromFile(File(it)))
+            //val item = MediaItem.fromUri(Uri.fromFile(File(it)))
+            val rawDataSource = RawResourceDataSource(this@MainActivity)
+            rawDataSource.open(DataSpec(RawResourceDataSource.buildRawResourceUri(it)))
+            val item = MediaItem.fromUri(rawDataSource.uri!!)
             player!!.addMediaItem(item)
         }
         player!!.prepare()
