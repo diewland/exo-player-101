@@ -26,9 +26,39 @@ class MainActivity : AppCompatActivity() {
 
         // set media source
         val playlist = arrayListOf(
-            "/sdcard/video1.mp4",
-            "/sdcard/video2.mp4",
-            "/sdcard/video3.mp4",
+            // result: close in 10 m
+            //"/sdcard/video1.mp4",
+            //"/sdcard/video2.mp4",
+            //"/sdcard/video3.mp4",
+
+            // result: close in 1 h
+            //"/sdcard/mp4/pana_22.mp4",
+            //"/sdcard/mp4/boss_26.mp4",
+            //"/sdcard/mp4/haopeng_29.mp4",
+
+            // result: pass
+            //"/sdcard/mp4/kaset_5.mp4",
+            //"/sdcard/mp4/coke_6.mp4",
+            //"/sdcard/mp4/thaiha_14.mp4",
+            //"/sdcard/mp4/travel_20.mp4",
+
+            // result: pass
+            //"/sdcard/mp4/travel_20.mp4",
+            //"/sdcard/mp4/pana_22.mp4",
+            //"/sdcard/mp4/thaiha_14.mp4",
+
+            // testing: pass
+            "/sdcard/mp4/travel_20.mp4",
+            "/sdcard/mp4/pana_22.mp4",
+            "/sdcard/mp4/boss_26.mp4",
+
+            //"/sdcard/mp4/kaset_5.mp4",
+            //"/sdcard/mp4/coke_6.mp4",
+            //"/sdcard/mp4/thaiha_14.mp4",
+            //"/sdcard/mp4/travel_20.mp4",
+            //"/sdcard/mp4/pana_22.mp4",
+            //"/sdcard/mp4/boss_26.mp4",
+            //"/sdcard/mp4/haopeng_29.mp4",
         )
         playlist.forEach {
             val item = MediaItem.fromUri(Uri.fromFile(File(it)))
